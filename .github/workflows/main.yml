@@ -1,18 +1,31 @@
-# 1. 定义流水线的各个阶段（按顺序执行）
-stages:
-  - build
-  - test
+name: CI/CD 自动化流水线
 
-# 2. 构建阶段的任务
-build-job:
-  stage: build
-  script:
-    - echo "=== [CI/CD] 正在编译/打包代码... ==="
-    - echo "打包完成！"
+# 触发条件：当向 main 分支 push 代码时触发
+on:
+  push:
+    branches: [ "main" ]
 
-# 3. 测试阶段的任务
-test-job:
-  stage: test
-  script:
-    - echo "=== [CI/CD] 正在运行自动化单元测试... ==="
-    - echo "所有单元测试通过！"
+jobs:
+  # 1. 构建任务
+  build-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 执行打包构建
+        run: |
+          echo "=== [CI/CD] 正在编译/打包代码... ==="
+          echo "打包完成！"
+
+  # 2. 测试任务
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 执行单元测试
+        run: |
+          echo "=== [CI/CD] 正在运行自动化单元测试... ==="
+          echo "所有单元测试通过！"
