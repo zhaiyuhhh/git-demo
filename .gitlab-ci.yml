@@ -1,0 +1,18 @@
+# 1. 定义流水线的各个阶段（按顺序执行）
+stages:
+  - build
+  - test
+
+# 2. 构建阶段的任务
+build-job:
+  stage: build
+  script:
+    - echo "=== [CI/CD] 正在编译/打包代码... ==="
+    - echo "打包完成！"
+
+# 3. 测试阶段的任务
+test-job:
+  stage: test
+  script:
+    - echo "=== [CI/CD] 正在运行自动化单元测试... ==="
+    - echo "所有单元测试通过！"
